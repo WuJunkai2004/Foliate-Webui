@@ -1,0 +1,56 @@
+/* C:/css/book-item.css */
+
+.book-item {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  
+  .book-item__cover-container {
+    width: 100%;
+    padding-top: 141%; /* 創建一個常見的書籍封面高寬比 (約 1:0.7) */
+    position: relative;
+    background-color: #e0e0e0; /* 圖片載入前的佔位顏色 */
+  }
+  
+  .book-item__cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 確保圖片填滿容器且不變形 */
+  }
+  
+  .book-item__info {
+    padding: 10px;
+  }
+  
+  .book-item__title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    /* 文字過長時顯示省略號 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .book-item__author {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
