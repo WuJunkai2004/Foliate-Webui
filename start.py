@@ -6,6 +6,7 @@ except ImportError:
 
 import os
 import vercel
+import neutral
 
 def main(handler = vercel.API, port = 18000):
     print(f"server start at http://localhost:{port}")
@@ -15,7 +16,7 @@ def main(handler = vercel.API, port = 18000):
     )
 
 
-class handler(vercel.API):
+class handler(neutral.layer):
     def vercel(self, url, data, headers):
         if(os.path.isdir(url)):
             self.send_code(200)
@@ -30,6 +31,7 @@ class handler(vercel.API):
             if(os.path.splitext(url)[1]=='.py'):
                 return vercel.ErrorStatu(self, 403)
             self.send_code(200)
+            self.auto_headers(url)
             self.send_file(url)
             return
 
