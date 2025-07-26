@@ -2,92 +2,101 @@
 <html lang="zh-TW">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#f3f3f3"/>
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icon/192x192.png">
+  <meta name="theme-color" content="#f3f3f3"/>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon/192x192.png">
 
-    <title>Foliate Library</title>
-    <link rel="stylesheet" href="css/foliate-library.css">
-    <link rel="stylesheet" href="css/book-item.css">
+  <title>Foliate Library</title>
+  <link rel="stylesheet" href="css/foliate-library.css">
+  <link rel="stylesheet" href="css/book-item.css">
 </head>
 
 <body>
-    <template id="book-item-template">
-        <article class="book-item">
-            <div class="book-item__cover-container">
-                <img class="book-item__cover" src="" alt="Book Cover">
-            </div>
-            <div class="book-item__info">
-                <h3 class="book-item__title">書籍標題位置</h3>
-                <p class="book-item__author">作者名稱位置</p>
-            </div>
-        </article>
-    </template>
+  <template id="book-item-template">
+    <article class="book-item">
+      <div class="book-item__cover-container">
+        <img class="book-item__cover" src="" alt="Book Cover">
+      </div>
+      <div class="book-item__info">
+        <h3 class="book-item__title">書籍標題位置</h3>
+        <p class="book-item__author">作者名稱位置</p>
+      </div>
+    </article>
+  </template>
 
-    <div class="foliate-library">
-        <div class="split-view" id="split-view">
-            <aside class="split-view__sidebar" id="sidebar">
-                <header class="header-bar header-bar--sidebar">
-                    <div class="header-bar__end">
-                        <button id="primary-menu-button" class="button button--icon" title="Main Menu" aria-label="Main Menu">
-                            <span class="icon">⋮</span>
-                        </button>
-                    </div>
-                </header>
-                <div class="sidebar__scroll-container">
-                    <nav id="sidebar-list-box" class="sidebar__nav">
-                        <ul>
-                            <li class="sidebar__nav-item is-active"><a>All Books</a></li>
-                            <li class="sidebar__nav-item"><a>Catalogs</a></li>
-                            <li class="sidebar__nav-item"><a>Unread</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
+  <template id="sidebar__nav-item-template">
+    <li class="sidebar__nav-item">
+      <a href="#" class="sidebar__nav-link">
+        <span class="sidebar__nav-text">分類名稱位置</span>
+      </a>
+    </li>
+  </template>
 
-            <main class="split-view__content" id="main-content">
-                <div class="main-stack" id="main-stack">
-                    <section id="library-view" class="main-stack__page">
-                        <header class="header-bar" id="library-header">
-                            <div class="header-bar__start">
-                                <button class="button button--icon button--sidebar-toggle" aria-label="Toggle Sidebar">
-                                    <span class="icon">☰</span>
-                                </button>
-                                <button class="button button--icon" title="Open" aria-label="Open">
-                                    <span class="icon">+</span>
-                                </button>
-                            </div>
-                            <h1 class="header-bar__title">Library</h1>
-                            <div class="header-bar__end">
-                                <button class="button button--icon" title="Library Menu" aria-label="Library Menu">
-                                    <span class="icon">⚙</span>
-                                </button>
-                                <button class="button button--icon" title="Search" aria-label="Search">
-                                    <span class="icon">🔍</span>
-                                </button>
-                            </div>
-                        </header>
-                        <div class="search-bar" id="search-bar">
-                            <input type="search" id="search-entry" class="search-bar__input"
-                                placeholder="Search library…">
-                        </div>
-
-                        <div class="content-area book-grid" id="books-view">
-                            </div>
-                    </section>
-                    
-                    <section id="catalog-view" class="main-stack__page is-hidden">
-                        </section>
-                </div>
-            </main>
+  <div class="foliate-library">
+    <div class="split-view" id="split-view">
+      <aside class="split-view__sidebar" id="sidebar">
+        <header class="header-bar header-bar--sidebar">
+          <div class="header-bar__end">
+            <button id="primary-menu-button" class="button button--icon" title="Main Menu" aria-label="Main Menu">
+              <span class="icon">⋮</span>
+            </button>
+          </div>
+        </header>
+        <div class="sidebar__scroll-container">
+          <nav id="sidebar-list-box" class="sidebar__nav">
+            <ul>
+              <li class="sidebar__nav-item is-active"><a>All Books</a></li>
+              <li class="sidebar__nav-item"><a>Catalogs</a></li>
+              <li class="sidebar__nav-item"><a>Unread</a></li>
+            </ul>
+          </nav>
         </div>
-    </div>
+      </aside>
 
-    <script src="scripts/book-item.js"></script>
-    <script src="scripts/library.js"></script>
+      <main class="split-view__content" id="main-content">
+        <div class="main-stack" id="main-stack">
+          <section id="library-view" class="main-stack__page">
+            <header class="header-bar" id="library-header">
+              <div class="header-bar__start">
+                <button class="button button--icon button--sidebar-toggle" aria-label="Toggle Sidebar">
+                  <span class="icon">☰</span>
+                </button>
+                <button class="button button--icon" title="Open" aria-label="Open">
+                  <span class="icon">+</span>
+                </button>
+              </div>
+              <h1 class="header-bar__title">Library</h1>
+              <div class="header-bar__end">
+                <button class="button button--icon" title="Library Menu" aria-label="Library Menu">
+                  <span class="icon">⚙</span>
+                </button>
+                <button class="button button--icon" title="Search" aria-label="Search">
+                  <span class="icon">🔍</span>
+                </button>
+              </div>
+            </header>
+            <div class="search-bar" id="search-bar">
+              <input type="search" id="search-entry" class="search-bar__input"
+                placeholder="Search library…">
+            </div>
+
+            <div class="content-area book-grid" id="books-view">
+              </div>
+          </section>
+          
+          <section id="catalog-view" class="main-stack__page is-hidden">
+            </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="scripts/book-item.js"></script>
+  <script src="scripts/library.js"></script>
+  <script src="scripts/sidebar.js"></script>
 
 </body>
 </html>

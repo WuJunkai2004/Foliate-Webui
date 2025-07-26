@@ -8,7 +8,7 @@ import os
 import vercel
 
 def main(handler = vercel.API, port = 18000):
-    print("server start")
+    print(f"server start at http://localhost:{port}")
     vercel.start(
         HandlerClass = handler,
         port = port

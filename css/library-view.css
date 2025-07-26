@@ -1,0 +1,5 @@
+/* By default, let's show the #empty page for this demo */
+#empty {
+    display: flex;
+    flex-direction: column;
+}

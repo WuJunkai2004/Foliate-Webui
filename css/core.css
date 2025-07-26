@@ -1,0 +1,214 @@
+/* ==========================================================================
+   1. Adwaita Design System - CSS Custom Properties (Design Tokens)
+   ========================================================================== */
+
+/*
+ * 這些變數模擬了 Libadwaita 的核心設計規範。
+ * 在一個真實的專案中，這應該是一個全域的基礎檔案。
+ * 我特意使用了 HSL 色彩模型，這讓主題的微調（例如產生亮色或暗色版本）變得更加容易。
+ */
+ :root {
+    /* Colors - Light Theme */
+    --adw-accent-color-hsl: 212, 78%, 58%; /* GNOME Blue: #3584e4 */
+    --adw-background-color-hsl: 0, 0%, 98%; /* Window Background: #fafafa */
+    --adw-view-background-color-hsl: 0, 0%, 100%; /* View Background: #ffffff */
+    --adw-text-color-hsl: 0, 0%, 18%; /* #2e2e2e */
+    --adw-text-secondary-color-hsl: 0, 0%, 45%; /* #737373 */
+    --adw-border-color-hsl: 0, 0%, 82%; /* #d1d1d1 */
+
+    /* Derived Colors - 使用 hsl() 函數來確保一致性 */
+    --adw-accent-color: hsl(var(--adw-accent-color-hsl));
+    --adw-accent-color-bg: hsla(var(--adw-accent-color-hsl), 0.1); /* 用於 Pill Button 背景 */
+    --adw-background-color: hsl(var(--adw-background-color-hsl));
+    --adw-view-background-color: hsl(var(--adw-view-background-color-hsl));
+    --adw-text-color: hsl(var(--adw-text-color-hsl));
+    --adw-text-secondary-color: hsl(var(--adw-text-secondary-color-hsl));
+    --adw-border-color: hsl(var(--adw-border-color-hsl));
+    
+    /* Typography */
+    --adw-font-family: 'Cantarell', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    --adw-font-size-base: 1rem; /* 16px */
+    --adw-font-size-lg: 1.5rem; /* 24px - for titles */
+    --adw-font-size-sm: 0.875rem; /* 14px - for descriptions */
+    
+    /* Spacing & Sizing */
+    --adw-spacing-xs: 4px;
+    --adw-spacing-sm: 8px;
+    --adw-spacing-md: 12px;
+    --adw-spacing-lg: 18px;
+    --adw-spacing-xl: 24px;
+    
+    /* Borders & Radius */
+    --adw-border-radius-sm: 6px;
+    --adw-border-radius-pill: 999px; /* For .style-pill buttons */
+    
+    /* Transitions */
+    --adw-transition-duration: 0.2s;
+    --adw-transition-timing-function: ease-in-out;
+}
+
+
+/* ==========================================================================
+   2. Base & Body Styles
+   ========================================================================== */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: var(--adw-font-family);
+    background-color: var(--adw-background-color);
+    color: var(--adw-text-color);
+    display: flex;
+    /* 模擬一個居中的應用視窗 */
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ==========================================================================
+   3. Main Layout Components
+   ========================================================================== */
+
+/*
+ * Corresponds to: <template class="FoliateLibraryView" parent="GtkStack">
+ * This is the root container for our switchable views.
+ */
+ .StkStack {
+    display: flex; /* GtkStack is a layout container */
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 900px; /* Demo constraint */
+    max-height: 700px; /* Demo constraint */
+    background-color: var(--adw-view-background-color);
+    border: 1px solid var(--adw-border-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: var(--adw-spacing-md);
+    overflow: hidden;
+}
+
+
+/*
+ * Corresponds to: <object class="GtkStackPage">
+ * The core logic of a GtkStack is to show only one child at a time.
+ * In a real app, JS would toggle an '.is-active' class.
+ * For this static demo, we'll show the "empty" state by default.
+ */
+ .GtkStackPage {
+    display: none; /* Hide all pages by default */
+    height: 100%;
+    flex-grow: 1; /* Ensure the visible page fills the container */
+}
+
+
+
+
+/*
+ * Corresponds to: <object class="GtkScrolledWindow">
+ * This is the scrollable area for the main book grid.
+ */
+ .GtkScrolledWindow {
+    /* property="vexpand">true */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: var(--adw-spacing-xl);
+}
+
+
+/* ==========================================================================
+   4. AdwStatusPage Component
+   ========================================================================== */
+   
+/*
+ * Corresponds to: <object class="AdwStatusPage">
+ * This is a key component in Libadwaita for empty/info states.
+ * It must perfectly center its content.
+ */
+.AdwStatusPage {
+    /* property="vexpand">true */
+    flex-grow: 1;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--adw-spacing-xl);
+    
+    /* Spacing between icon, title, description, and button */
+    gap: var(--adw-spacing-md);
+}
+
+.AdwStatusPage__icon {
+    /* Make the icon large and give it the secondary, less prominent color */
+    width: 64px;
+    height: 64px;
+    filter: opacity(0.7);
+    margin-bottom: var(--adw-spacing-sm);
+}
+
+/* The selector handles both .AdwStatusPage__title and .status-page__title from the HTML */
+.AdwStatusPage h2 {
+    font-size: var(--adw-font-size-lg);
+    font-weight: 700;
+    margin: 0;
+    color: var(--adw-text-color);
+}
+
+/* The selector handles both .AdwStatusPage__description and .status-page__description */
+.AdwStatusPage p {
+    font-size: var(--adw-font-size-base);
+    color: var(--adw-text-secondary-color);
+    margin: 0;
+    max-width: 320px; /* Prevent description from being too wide */
+    line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   5. GtkButton Component (Pill Style)
+   ========================================================================== */
+   
+/*
+ * Corresponds to: <object class="GtkButton"> with <style><class name="pill"/></style>
+ * This is the signature Libadwaita "Pill" button.
+ */
+.GtkButton.style-pill {
+    /* Reset default button styles */
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+
+    /* Pill-specific styles */
+    background-color: var(--adw-accent-color-bg);
+    color: var(--adw-accent-color);
+    border-radius: var(--adw-border-radius-pill);
+    padding: var(--adw-spacing-sm) var(--adw-spacing-lg);
+    font-size: var(--adw-font-size-sm);
+    margin-top: var(--adw-spacing-sm); /* Extra space above the button */
+
+    /* Smooth transition for hover/active states */
+    transition: all var(--adw-transition-duration) var(--adw-transition-timing-function);
+}
+
+.GtkButton.style-pill:hover {
+    /* On hover, slightly darken the background and add a subtle shadow */
+    background-color: hsla(var(--adw-accent-color-hsl), 0.15);
+    box-shadow: 0 2px 6px hsla(var(--adw-accent-color-hsl), 0.1);
+}
+
+.GtkButton.style-pill:active {
+    /* On click, make the effect more pronounced */
+    transform: translateY(1px);
+    background-color: hsla(var(--adw-accent-color-hsl), 0.2);
+    box-shadow: none;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library View</title>
+  <link rel="stylesheet" href="/css/library-view.css">
+  <link rel="stylesheet" href="/css/core.css">
+</head>
+
+<body>
+
+  <main class="GtkStack FoliateLibraryView" id="template">
+
+    <section class="GtkStackPage" id="main">
+      <div class="GtkScrolledWindow vexpand" id="scrolled">
+      </div>
+    </section>
+
+    <section class="GtkStackPage" id="empty">
+      <div class="AdwStatusPage vexpand">
+        <img class="AdwStatusPage__icon" src="../assets/com.github.johnfactotum.Foliate-symbolic.svg">
+        <h2 class="AdwStatusPage__title">Not books yet</h2>
+        <p class="AdwStatusPage__description">Open a book to start reading</p>
+        <button class="GtkButton halign-center style-pill">
+          <span class="GtkButton__label">Open…</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="GtkStackPage" id="no-results">
+      <div class="AdwStatusPage vexpand">
+        <img class="AdwStatusPage__icon" src="../assets/edit-find-symbolic.svg">
+        <h2 class="status-page__title">No Results Found</h2>
+        <p class="status-page__description">Try a different search</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/scripts/library-view.js"></script>
+
+</body>
+
+</html>
