@@ -181,7 +181,7 @@ body {
  * Corresponds to: <object class="GtkButton"> with <style><class name="pill"/></style>
  * This is the signature Libadwaita "Pill" button.
  */
-.GtkButton.style-pill {
+.style-pill {
     /* Reset default button styles */
     border: 1px solid transparent;
     cursor: pointer;
@@ -200,13 +200,13 @@ body {
     transition: all var(--adw-transition-duration) var(--adw-transition-timing-function);
 }
 
-.GtkButton.style-pill:hover {
+.style-pill:hover {
     /* On hover, slightly darken the background and add a subtle shadow */
     background-color: hsla(var(--adw-accent-color-hsl), 0.15);
     box-shadow: 0 2px 6px hsla(var(--adw-accent-color-hsl), 0.1);
 }
 
-.GtkButton.style-pill:active {
+.style-pill:active {
     /* On click, make the effect more pronounced */
     transform: translateY(1px);
     background-color: hsla(var(--adw-accent-color-hsl), 0.2);
