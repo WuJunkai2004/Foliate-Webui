@@ -104,7 +104,7 @@ html {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Chrome/Safari */
     -khtml-user-select: none; /* Konqueror */
-    -moz-user-select: none; /* Firefox */
+    user-select: none; /* Firefox */
 }
 
 body {

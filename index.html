@@ -13,6 +13,39 @@
 
 <body>
 
+  <menu class="menu" id="library-menu" hidden>
+    <ul>
+      <li class="menu-item" >
+        <p>List View</p>
+      </li>
+      <li class="menu-item" >
+        <p>Grid View</p>
+      </li>
+    </ul>
+  </menu>
+
+  <menu class="menu" id="primary-menu" hidden>
+    <ul>
+      <li class="menu-item">
+        <p>Open…</p>
+      </li>
+      <li class="menu-item">
+        <p>Fullscreen</p>
+      </li>
+      <!--
+      <li class="menu-item">
+        <p>Preferences</p>
+      </li>
+      <li class="menu-item">
+        <p>Keyboard Shortcuts</p>
+      </li>
+      -->
+      <li class="menu-item">
+        <p>About Foliate-Webui</p>
+      </li>
+    </ul>
+  </menu>
+
   <main class="FoliateLibrary GtkBox vertical">
 
     <div class="AdwBreakpointBin" id="breakpoint-bin">
@@ -21,7 +54,11 @@
         <aside class="AdwOverlaySplitView__sidebar">
           <div class="AdwToolBarView">
             <div class="AdwToolBarView__top AdwHeaderBar">
-              <button class="AdwHeaderBar__end GtkMenuButton" id="primary-menu-button">
+              <button class="AdwHeaderBar__end GtkMenuButton"
+                id="primary-menu-button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="library-menu">
                 <img class="GtkMenuButton__icon" src="/assets/icons/open-menu-symbolic.svg">
               </button>
             </div>
@@ -47,11 +84,15 @@
               <div class="AdwHeaderBar__title-widget">
                 <p class="GtkLable style-title">Library</p>
               </div>
-              <button class="AdwHeaderBar__end GtkMenuButton">
-                <img class="GtkMenuButton__icon" src="/assets/icons/view-more-symbolic.svg" alt="icon">
-              </button>
               <button class="AdwHeaderBar__end GtkToggleBar">
                 <img class="GtkToggleBar__icon" src="/assets/icons/edit-find-symbolic.svg" alt="icon">
+              </button>
+              <button class="AdwHeaderBar__end GtkMenuButton"
+                id="library-menu-button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="library-menu">
+                <img class="GtkMenuButton__icon" src="/assets/icons/view-more-symbolic.svg" alt="icon">
               </button>
             </div>
 
@@ -95,7 +136,7 @@
 
   </main>
   <script src="/scripts/utils.js"></script>
-  <script src="/scripts/library-view.js"></script>
+  <script src="/scripts/library.js"></script>
 
 </body>
 

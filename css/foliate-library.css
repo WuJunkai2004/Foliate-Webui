@@ -45,3 +45,137 @@ button{
     padding: 0;
     font: inherit;
 }
+
+:root {
+    /* Colors - Light Theme (用於彈出式選單) */
+    --adw-popover-bg-hsl: 0, 0%, 100%;
+    --adw-popover-shadow-alpha: 0.12;
+    --adw-text-color-hsl: 0, 0%, 18%;
+    --adw-menu-item-hover-bg-hsl: 0, 0%, 91%; /* #e8e8e8 */
+
+    /* Derived Colors */
+    --adw-popover-bg: hsl(var(--adw-popover-bg-hsl));
+    --adw-text-color: hsl(var(--adw-text-color-hsl));
+    --adw-menu-item-hover-bg: hsl(var(--adw-menu-item-hover-bg-hsl));
+    --adw-popover-shadow: 0 4px 12px hsla(0, 0%, 0%, var(--adw-popover-shadow-alpha));
+
+    /* Typography */
+    --adw-font-family: 'Cantarell', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    --adw-font-size: 0.95rem; /* 15.2px - GTK 選單文字通常比基礎文字小一點 */
+
+    /* Spacing & Sizing */
+    --adw-spacing-xs: 4px;
+    --adw-spacing-sm: 8px;
+    --adw-spacing-md: 12px;
+
+    /* Borders & Radius */
+    --adw-radius-popover: 12px;
+    --adw-radius-item: 6px;
+
+    /* Transitions & Animations */
+    --adw-transition-duration: 0.15s;
+    --adw-transition-timing: cubic-bezier(0.2, 0.0, 0.2, 1);
+}
+
+
+/* ==========================================================================
+   2. Base Styles for Demonstration
+   ========================================================================== */
+
+body {
+    /* 僅為示範提供一個乾淨的背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: var(--adw-font-family);
+}
+
+
+/*
+ * Corresponds to: <menu id="library-menu">
+ * 這是彈出式選單的根容器。我們將其設定為絕對定位，
+ * 以便 JavaScript 可以將其放置在觸發按鈕的旁邊。
+ */
+ .menu {
+    /* Layout & Positioning */
+    position: absolute; /* 由 JS 控制位置 */
+    min-width: 200px;
+    z-index: 100;
+
+    /* Appearance */
+    background-color: var(--adw-popover-bg);
+    border-radius: var(--adw-radius-popover);
+    box-shadow: var(--adw-popover-shadow);
+    padding: var(--adw-spacing-xs); /* 在所有項目周圍提供一個小的內邊距 */
+
+    /* Animation & Visibility */
+    /* 預設狀態是隱藏但可供動畫的 */
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+    transform-origin: top center;
+    transition: opacity var(--adw-transition-duration) var(--adw-transition-timing),
+                transform var(--adw-transition-duration) var(--adw-transition-timing);
+    pointer-events: none; /* 隱藏時不可點擊 */
+}
+
+/*
+ * 當 JavaScript 移除 'hidden' 屬性或添加一個 'is-visible' class 時，
+ * 選單會以平滑的動畫出現，這完美模擬了 Libadwaita 的原生感覺。
+ */
+.menu:not([hidden]) {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+/*
+ * Corresponds to: <ul> inside the menu
+ * 我們需要移除列表的預設樣式。
+ */
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==========================================================================
+   4. Menu Item Styling
+   ========================================================================== */
+
+/*
+ * Corresponds to: <item> in the .ui file and <li class="menu-item"> in HTML.
+ * 這是選單中最重要的可互動元素。
+ */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: var(--adw-spacing-sm) var(--adw-spacing-md);
+    border-radius: var(--adw-radius-item);
+    color: var(--adw-text-color);
+    font-size: var(--adw-font-size);
+    cursor: pointer;
+    user-select: none; /* 防止意外選取文字 */
+    transition: background-color var(--adw-transition-duration) var(--adw-transition-timing);
+}
+
+/*
+ * 懸停效果是提供視覺回饋的關鍵。
+ * 背景色變為一個非常柔和的灰色，符合 Adwaita 的設計。
+ */
+.menu-item:hover {
+    background-color: var(--adw-menu-item-hover-bg);
+}
+
+/*
+ * Corresponds to: <p> tag inside the menu item.
+ * 確保文字容器不會增加額外的邊距，以免破壞我們的 padding 設計。
+ */
+.menu-item p {
+    margin: 0;
+    white-space: nowrap; /* 選單項目通常不換行 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
