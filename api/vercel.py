@@ -92,7 +92,7 @@ class URL(server.SimpleHTTPRequestHandler):
     'URL处理'
     def translate_path(self):
         '获取路径'
-        dirname, filename = os.path.split( os.path.abspath( __file__ ) )
+        dirname = os.getcwd()
         path = self.path.split('?',1)[0]
         return dirname + path
         
