@@ -16,15 +16,15 @@ Read book in browser with PWA like `Foliate`
 ```bash
 git clone https://www.github.com/WuJunkai2004/foliate-webui.git
 cd foliate-webui
-python3 -m api
+python3 -m server
 ```
 then open `http://localhost:18000` in your web browser. You now have a running Foliate WebUI instance.  
 
 2. Install it as a PWA
-Different browsers have different ways to install a PWA, but they all have a similar process:
-- In Chrome, click the three dots in the top right corner, then select "Install Foliate WebUI".
-- In Edge, click the three dots in the top right corner, then select "Install Foliate WebUI".
-- In Firefox, click the three dots in the top right corner, then select "Install Foliate WebUI".
+Different browsers have different ways to install a PWA, but they all have a similar process:  
+- In Chrome, click the three dots in the top right corner, then select "Install Foliate WebUI".  
+- In Edge, click the three dots in the top right corner, then select "Install Foliate WebUI".  
+- In Firefox, click the three dots in the top right corner, then select "Install Foliate WebUI".  
 After installation, you can find the app in your application menu or desktop.  
 And most times, It can work without the backend server running.
 

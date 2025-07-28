@@ -7,7 +7,7 @@ except ImportError:
 import os
 import mimetypes
 
-import api.vercel as vercel
+import server.vercel as vercel
 
 def main(handler = vercel.API, port = 18000):
     print(f"server start at http://localhost:{port}")
