@@ -58,7 +58,7 @@
                 id="primary-menu-button"
                 aria-haspopup="true"
                 aria-expanded="false"
-                aria-controls="library-menu">
+                aria-controls="primary-menu">
                 <img class="GtkMenuButton__icon" src="/assets/icons/open-menu-symbolic.svg">
               </button>
             </div>
@@ -84,7 +84,11 @@
               <div class="AdwHeaderBar__title-widget">
                 <p class="GtkLable style-title">Library</p>
               </div>
-              <button class="AdwHeaderBar__end GtkToggleBar">
+              <button class="AdwHeaderBar__end GtkToggleBar"
+                id="library-search-button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="search-bar">
                 <img class="GtkToggleBar__icon" src="/assets/icons/edit-find-symbolic.svg" alt="icon">
               </button>
               <button class="AdwHeaderBar__end GtkMenuButton"
@@ -96,7 +100,7 @@
               </button>
             </div>
 
-            <div class="AdwToolBarView__top GtkSearchBar" id="search-bar">
+            <div class="AdwToolBarView__top GtkSearchBar" id="search-bar" hidden>
               <input class="GtkSearchEntry" id="search-entry" type="text" placeholder="Search library…">
             </div>
 
@@ -122,7 +126,11 @@
                 <p class="GtkLable style-title"></p>
               </div>
 
-              <button class="AdwHeaderBar__end GtkButton" id="catalog-search-button">
+              <button class="AdwHeaderBar__end GtkButton"
+                id="catalog-search-button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="search-bar">
                 <img class="GtkButton__icon" src="/assets/icons/edit-find-symbolic.svg" alt="icon">
               </button>
             </div>

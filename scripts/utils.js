@@ -50,6 +50,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function buttonLogic(button, object, callback) {
+    // click button, change object property, and call callback with the property value
+    if(!button) {
+        console.error('無法找到按鈕或物件！');
+        return;
+    }
+    let isHidden = false;
+    if(object && object.hidden !== undefined) {
+        isHidden = object.hidden;
+    }
+    button.addEventListener('click', () => {
+        console.log(`Button clicked, current hidden state: ${isHidden}`);
+        if (object && object.hidden !== undefined) {
+            object.hidden = isHidden;
+            isHidden = !isHidden;
+        }
+        if (callback) {
+            callback(isHidden);
+        }
+    });
+}
+
 
 function buttonMenuLogic(menuButton, menu, callback){
     if(!menuButton || !menu){
@@ -105,4 +127,30 @@ function buttonMenuLogic(menuButton, menu, callback){
             hideMenu();
         }
     });
+}
+
+
+function searchBarLogic(searchBar, searchButton, callback) {
+    if(!searchBar){
+        console.error('無法找到搜尋欄！');
+        return;
+    }
+
+    searchBar.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            const query = searchBar.value.trim();
+            if (query) {
+                callback(query);
+            }
+        }
+    });
+
+    if(searchButton){
+        searchButton.addEventListener('click', () => {
+            const query = searchBar.value.trim();
+            if (query) {
+                callback(query);
+            }
+        });
+    }
 }
