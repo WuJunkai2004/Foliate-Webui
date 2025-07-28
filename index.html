@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library</title>
-  <link rel="stylesheet" href="/css/library.css">
-  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/foliate-library.css">
+  <link rel="stylesheet" href="/css/core.css"></ink> 
+  <link rel="stylesheet" href="/css/core-styles.css"></ink>
 </head>
 
 <body>
@@ -14,76 +15,80 @@
   <main class="FoliateLibrary GtkBox vertical">
 
     <div class="AdwBreakpointBin" id="breakpoint-bin">
-      <div class="AdwBreakpoint">
-        <div class="AdwOverlaySplitView" id="split-view">
+      <div class="AdwBreakpoint AdwOverlaySplitView" id="split-view">
 
-          <aside class="AdwOverlaySplitView__sidebar">
-            <div class="AdwToolBar">
-              <button class="AdwToolBar__end GtkMenuButton" id="primary-menu-button">
+        <aside class="AdwOverlaySplitView__sidebar">
+          <div class="AdwToolBarView">
+            <div class="AdwToolBarView__top AdwHeaderBar">
+              <button class="AdwHeaderBar__end GtkMenuButton" id="primary-menu-button">
                 <img class="GtkMenuButton__icon" src="/assets/open-menu-symbolic.svg">
               </button>
             </div>
-          </aside>
 
-          <main class="AdwOverlaySplitView__content GtkStack" id="main-stack">
-            <section class="GtkStackPage AdwToolBarView" id="library-toolbar-view">
-              <div class="AdwToolBarView__top AdwHeaderBar">
-                <div class="AdwHeaderBar__start GtkToggleButton">
-                  <img class="GtkToggleButton__icon" src="/assets/sidebar-show-symbolic.svg" alt="icon">
-                </div>
-                <div class="AdwHeaderBar__start GtkButton">
-                  <img class="GtkButton__icon" src="/assets/list-add-symbolic.svg" alt="icon">
-                </div>
-                <div class="AdwHeaderBar__title-widget">
-                  <p class="GtkLable style-title">Library</p>
-                </div>
-                <div class="AdwHeaderBar__end GtkMenuButton">
-                  <img class="GtkMenuButton__icon" src="/assets/view-more-symbolic.svg" alt="icon">
-                </div>
-                <div class="AdwHeaderBar__end GtkToggleBar">
-                  <img class="GtkToggleBar__icon" src="/assets/edit-find-symbolic.svg" alt="icon">
+            <div>
+              <div class="GtkScrolledWindow">
+                <div class="GtkListBox style-navigation-sidebar" id="sidebar-list">
                 </div>
               </div>
+            </div>
+          </div>
+        </aside>
 
-              <div class="AdwToolBarView__top GtkSearchBar" id="search-bar">
-                <input class="GtkSearchEntry" id="search-entry" type="text" placeholder="Search library…">
-              </div>
-
-              <unit href="/units/library-view.html" id="books-view"></unit>
-            </section>
-
-            <section class="GtkStackPage AdwToolBarView style-background" id="catalog-toolbar-view">
+        <main class="AdwOverlaySplitView__content GtkStack" id="main-stack">
+          <section class="GtkStackPage AdwToolBarView" id="library-toolbar-view">
+            <div class="AdwToolBarView__top AdwHeaderBar">
               <div class="AdwHeaderBar__start GtkToggleButton">
                 <img class="GtkToggleButton__icon" src="/assets/sidebar-show-symbolic.svg" alt="icon">
               </div>
+              <div class="AdwHeaderBar__start GtkButton">
+                <img class="GtkButton__icon" src="/assets/list-add-symbolic.svg" alt="icon">
+              </div>
+              <div class="AdwHeaderBar__title-widget">
+                <p class="GtkLable style-title">Library</p>
+              </div>
+              <div class="AdwHeaderBar__end GtkMenuButton">
+                <img class="GtkMenuButton__icon" src="/assets/view-more-symbolic.svg" alt="icon">
+              </div>
+              <div class="AdwHeaderBar__end GtkToggleBar">
+                <img class="GtkToggleBar__icon" src="/assets/edit-find-symbolic.svg" alt="icon">
+              </div>
+            </div>
 
+            <div class="AdwToolBarView__top GtkSearchBar" id="search-bar">
+              <input class="GtkSearchEntry" id="search-entry" type="text" placeholder="Search library…">
+            </div>
+
+            <from href="/units/library-view.html" id="books-view"></unit>
+          </section>
+
+          <section class="GtkStackPage AdwToolBarView style-background" id="catalog-toolbar-view">
+
+            <div class="AdwToolBarView__top AdwHeaderBar">
+              <div class="AdwHeaderBar__start GtkToggleButton">
+                <img class="GtkToggleButton__icon" src="/assets/sidebar-show-symbolic.svg" alt="icon">
+              </div>
+  
               <div class="AdwHeaderBar__start GtkButton">
                 <img class="GtkButton__icon" src="/assets/go-previous-symbolic.svg" alt="icon">
               </div>
-
+  
               <div class="AdwHeaderBar__start GtkButton">
                 <img class="GtkButton__icon" src="/assets/go-next-symbolic.svg" alt="icon">
               </div>
 
-              <div class="AdwToolBarView__top AdwHeaderBar">
-                <div class="AdwHeaderBar__title-widget">
-                  <p class="GtkLable style-title"></p>
-                </div>
+              <div class="AdwHeaderBar__title-widget">
+                <p class="GtkLable style-title"></p>
               </div>
 
               <div class="AdwHeaderBar__end GtkButton" id="catalog-search-button">
                 <img class="GtkButton__icon" src="/assets/edit-find-symbolic.svg" alt="icon">
               </div>
+            </div>
 
-              <unit herf="/units/FoliateOPDSView.html" id="opds-view"></unit>
-            </section>
+            <unit herf="/units/FoliateOPDSView.html" id="opds-view"></unit>
+          </section>
 
-            <section class="GtkStackPage AdwToolBarView" id="search-toolbar-view">
-
-            </section>
-
-          </main>
-        </div>
+        </main>
       </div>
     </div>
 
