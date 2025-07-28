@@ -1,233 +1,39 @@
-/*
- * Base styles and Adwaita-like design tokens.
- */
-:root {
-    --adw-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --adw-bg-color: #fafafa;
-    --adw-header-bg-color: #f0f0f0;
-    --adw-sidebar-bg-color: #e8e8e8;
-    --adw-text-color: #2e2e2e;
-    --adw-text-color-light: #6e6e6e;
-    --adw-border-color: #d1d1d1;
-    --adw-accent-color: #3584e4;
-    --adw-spacing-unit: 8px;
-    --adw-border-radius: 4px;
-    --sidebar-width: 250px;
-    --header-height: 50px;
-    --border-color: #e0e0e0;
-}
-
-/* Basic reset */
-* {
-    box-sizing: border-box;
+html, body {
     margin: 0;
     padding: 0;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Chrome/Safari */
-    -khtml-user-select: none; /* Konqueror */
-    -moz-user-select: none; /* Firefox */
-}
-
-html, body {
     height: 100%;
+    width: 100%;
     font-family: var(--adw-font-family);
+    font-size: var(--adw-font-size);
     background-color: var(--adw-bg-color);
     color: var(--adw-text-color);
+    overflow: hidden; /* 模擬桌面應用程式的固定視窗 */
 }
 
-/* Corresponds to FoliateLibrary (GtkBox, vertical) */
-.foliate-library {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-}
 
-/* Corresponds to AdwOverlaySplitView */
-.split-view {
+/* Corresponds to: AdwBreakpointBin and AdwOverlaySplitView */
+.AdwBreakpointBin, .AdwOverlaySplitView {
     display: flex;
     flex-grow: 1;
+    overflow: hidden;
+    width: 100%;
     height: 100%;
 }
 
-/* Corresponds to Sidebar <child> */
-.split-view__sidebar {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
+
+#Breakpoint-bin {
+    min-height: 300px;
+    min-width: 360px;
+}
+
+
+#AdwOverlaySplitView__sidebar {
     /* Simulates sidebar-width-fraction="0.2" */
     flex-basis: 20%;
-    width: var(--sidebar-width);
-    min-width: 240px;
-    background-color: var(--adw-sidebar-bg-color);
-    border-right: 1px solid var(--adw-border-color);
-    transition: margin-left 0.2s ease-in-out;
-}
-
-.split-view__content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Corresponds to Sidebar's GtkScrolledWindow */
-.sidebar__scroll-container {
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-/* Corresponds to GtkListBox.navigation-sidebar */
-.sidebar__nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 8px 0;
-}
-.sidebar__nav-item a {
-    display: block;
-    padding: var(--adw-spacing-unit) calc(var(--adw-spacing-unit) * 2);
-    text-decoration: none;
-    color: var(--adw-text-color-light);
-    font-weight: 500;
-    cursor: pointer;
-}
-.sidebar__nav-item.is-active a {
-    color: var(--adw-text-color);
-    background-color: rgba(0, 0, 0, 0.05);
-    font-weight: bold;
-    color: #007bff;
-}
-
-/* Corresponds to GtkStack */
-.split-view__content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background-color: var(--adw-bg-color);
-}
-.main-stack {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-.main-stack__page {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex-grow: 1;
-}
-.main-stack__page.is-hidden {
-    display: none;
-}
-
-/* Corresponds to AdwHeaderBar */
-.header-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--adw-spacing-unit);
-    background-color: var(--adw-header-bg-color);
-    border-bottom: 1px solid var(--adw-border-color);
-    flex-shrink: 0;
-}
-.header-bar--sidebar {
-    justify-content: flex-end; /* Sidebar header only has an end child */
-}
-.header-bar__start, .header-bar__end {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--adw-spacing-unit) / 2);
-}
-.header-bar__title {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 1.1rem;
-    margin: 0;
-}
-
-/* General button styling */
-.button {
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: var(--adw-border-radius);
-    padding: calc(var(--adw-spacing-unit) / 2);
-    cursor: pointer;
-    color: var(--adw-text-color);
-}
-.button--icon {
-    font-size: 1.25rem;
-    line-height: 1;
-    width: 32px;
-    height: 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.button:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-.button:active {
-    background-color: rgba(0, 0, 0, 0.12);
-}
-
-/*
- * Corresponds to GtkToggleButton for the sidebar.
- * It's hidden by default on wider screens.
- */
-.button--sidebar-toggle {
-    display: none;
 }
 
 
-/* Corresponds to GtkSearchBar */
-.search-bar {
-    padding: var(--adw-spacing-unit);
-    border-bottom: 1px solid var(--adw-border-color);
-    background-color: var(--adw-header-bg-color);
-    /* In a real implementation, this would be toggled by JS */
-    display: none;
-}
-.search-bar__input {
+main {
     width: 100%;
-    padding: calc(var(--adw-spacing-unit) * 0.75) var(--adw-spacing-unit);
-    border: 1px solid var(--adw-border-color);
-    border-radius: var(--adw-border-radius);
-    font-size: 1rem;
-}
-
-/* Main content area placeholder */
-.content-area {
-    flex-grow: 1;
-    padding: calc(var(--adw-spacing-unit) * 2);
-    overflow-y: auto;
-}
-
-/*
- * Breakpoint behavior: Simulates AdwBreakpointBin and AdwOverlaySplitView's collapsed state.
- * At this width, the sidebar hides and the toggle button appears.
- */
-@media (max-width: 800px) {
-    .split-view.is-sidebar-collapsed .split-view__sidebar {
-        margin-left: -100%;
-    }
-    .button--sidebar-toggle {
-        display: inline-flex;
-    }
-    
-    /* When sidebar is explicitly opened in collapsed mode, it overlays the content */
-    .split-view.is-sidebar-open .split-view__sidebar {
-        position: absolute;
-        z-index: 100;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        margin-left: 0;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-    }
-}
-
-.book-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
+    height: 100%;
 }

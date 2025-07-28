@@ -20,6 +20,7 @@ class handler(neutral.layer):
     def vercel(self, url, data, headers):
         if(os.path.isdir(url)):
             self.send_code(200)
+            self.auto_headers(url)
             for home in ['index.html','index.htm']:
                 if(os.path.isfile(url + home)):
                     self.send_file(url + home)

@@ -1,0 +1,49 @@
+/*
+ * Corresponds to: <object class="GtkButton"> with <style><class name="pill"/></style>
+ * This is the signature Libadwaita "Pill" button.
+ */
+ .style-pill {
+    /* Reset default button styles */
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+
+    /* Pill-specific styles */
+    background-color: var(--adw-accent-color-bg);
+    color: var(--adw-accent-color);
+    border-radius: var(--adw-border-radius-pill);
+    padding: var(--adw-spacing-sm) var(--adw-spacing-lg);
+    font-size: var(--adw-font-size-sm);
+    margin-top: var(--adw-spacing-sm); /* Extra space above the button */
+
+    /* Smooth transition for hover/active states */
+    transition: all var(--adw-transition-duration) var(--adw-transition-timing-function);
+}
+
+.style-pill:hover {
+    /* On hover, slightly darken the background and add a subtle shadow */
+    background-color: hsla(var(--adw-accent-color-hsl), 0.15);
+    box-shadow: 0 2px 6px hsla(var(--adw-accent-color-hsl), 0.1);
+}
+
+.style-pill:active {
+    /* On click, make the effect more pronounced */
+    transform: translateY(1px);
+    background-color: hsla(var(--adw-accent-color-hsl), 0.2);
+    box-shadow: none;
+}
+
+
+.style-title {
+    font-weight: bold;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.style-background {
+    background-color: var(--adw-bg-color); /* 還原背景色 */
+}

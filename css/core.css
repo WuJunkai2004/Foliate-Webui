@@ -45,6 +45,39 @@
     /* Transitions */
     --adw-transition-duration: 0.2s;
     --adw-transition-timing-function: ease-in-out;
+
+    --adw-headerbar-bg-hsl: 0, 0%, 94%; /* HeaderBar Background: #f0f0f0 */
+    --adw-sidebar-bg-hsl: 0, 0%, 91%; /* Sidebar Background: #e8e8e8 */
+    --adw-view-bg-hsl: 0, 0%, 100%; /* Content View Background: #ffffff */
+    --adw-text-hsl: 0, 0%, 18%; /* Primary Text: #2e2e2e */
+    --adw-text-dim-hsl: 0, 0%, 45%; /* Dim Text: #737373 */
+    --adw-border-hsl: 0, 0%, 82%; /* #d1d1d1 */
+    --adw-button-hover-alpha: 0.08;
+    --adw-button-active-alpha: 0.12;
+
+    /* Derived Colors - 使用 hsl() 函數來保持色彩體系的一致性 */
+    --adw-accent: hsl(var(--adw-accent-hsl));
+    --adw-bg-color: hsl(var(--adw-bg-hsl));
+    --adw-headerbar-color: hsl(var(--adw-headerbar-bg-hsl));
+    --adw-sidebar-color: hsl(var(--adw-sidebar-bg-hsl));
+    --adw-view-color: hsl(var(--adw-view-bg-hsl));
+    --adw-text-color: hsl(var(--adw-text-hsl));
+    --adw-text-dim-color: hsl(var(--adw-text-dim-hsl));
+    --adw-border-color: hsl(var(--adw-border-hsl));
+    --adw-button-hover-color: hsla(0, 0%, 0%, var(--adw-button-hover-alpha));
+    --adw-button-active-color: hsla(0, 0%, 0%, var(--adw-button-active-alpha));
+
+    /* Typography */
+    --adw-font-family: 'Cantarell', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    --adw-font-size: 1rem; /* 16px */
+    
+    /* Spacing & Sizing */
+    --adw-spacing: 12px;
+    --adw-button-size: 32px;
+    
+    /* Borders & Radius */
+    --adw-radius: 8px;
+    --adw-radius-circular: 50%;
 }
 
 
@@ -54,10 +87,24 @@
 
 html {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: var(--adw-font-family);
+    font-size: var(--adw-font-size);
+    background-color: var(--adw-bg-color);
+    color: var(--adw-text-color);
+    overflow: hidden; /* 模擬桌面應用程式的固定視窗 */
 }
 
 *, *::before, *::after {
     box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
 }
 
 body {
@@ -76,6 +123,15 @@ body {
 /* ==========================================================================
    3. Main Layout Components
    ========================================================================== */
+
+/*
+ * Corresponds to: <object class="GtkBox>
+ */
+ .GtkBox {
+    display: flex;
+    height: 100%;
+    overflow: hidden; /* Prevent overflow */
+ }
 
 /*
  * Corresponds to: <template class="FoliateLibraryView" parent="GtkStack">
@@ -173,42 +229,127 @@ body {
 }
 
 
+.AdwBreakpointBin {
+    display: flex;
+    flex-direction: column;
+    border: 0;
+}
+
+.AdwBreakpoint {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+.AdwOverlaySplitView {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.AdwOverlaySplitView__sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: var(--sidebar-width);
+    min-width: 240px;
+    background-color: var(--adw-sidebar-bg-color);
+    border-right: 1px solid var(--adw-border-color);
+    transition: margin-left 0.2s ease-in-out;
+}
+
+.AdwOverlaySplitView__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--adw-bg-color);
+}
+
+/* Corresponds to: AdwToolbarView (in main content) */
+.AdwToolBarView {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--adw-view-color);
+}
+
+.AdwHeaderBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--adw-spacing-unit);
+    background-color: var(--adw-header-bg-color);
+    border-bottom: 1px solid var(--adw-border-color);
+    flex-shrink: 0;
+}
+
+/* Corresponds to: title-widget in AdwHeaderBar */
+.AdwHeaderBar__title-widget {
+    /* 這是讓標題在 start/end 項目之間保持居中的關鍵 */
+    flex-grow: 1;
+    text-align: center;
+    margin: 0 var(--adw-spacing); /* 確保與按鈕有足夠間距 */
+}
+
+/* Corresponds to: GtkButton, GtkToggleButton in HeaderBar */
+.AdwHeaderBar__start,
+.AdwHeaderBar__end {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--adw-button-size);
+    height: var(--adw-button-size);
+    border-radius: var(--adw-radius-circular);
+    transition: background-color var(--adw-transition);
+}
+.AdwHeaderBar__start:hover,
+.AdwHeaderBar__end:hover {
+    background-color: var(--adw-button-hover-color);
+}
+.AdwHeaderBar__start:active,
+.AdwHeaderBar__end:active {
+    background-color: var(--adw-button-active-color);
+}
+.AdwHeaderBar img {
+    width: 16px;
+    height: 16px;
+    filter: opacity(0.7); /* 使圖示顏色不那麼刺眼 */
+}
+
+
+.GtkSearchBar {
+    padding: var(--adw-spacing);
+    border-bottom: 1px solid var(--adw-border-color);
+    background-color: var(--adw-headerbar-color);
+}
+
+/* Corresponds to: GtkSearchEntry */
+.GtkSearchEntry {
+    width: 100%;
+    border: 1px solid var(--adw-border-color);
+    background-color: var(--adw-view-color);
+    border-radius: var(--adw-radius);
+    padding: calc(var(--adw-spacing) / 2) var(--adw-spacing);
+    font-size: var(--adw-font-size);
+    outline: none;
+    transition: box-shadow var(--adw-transition), border-color var(--adw-transition);
+}
+.GtkSearchEntry:focus {
+    border-color: var(--adw-accent);
+    box-shadow: 0 0 0 2px hsla(var(--adw-accent-hsl), 0.2);
+}
+
+
+
 /* ==========================================================================
-   5. GtkButton Component (Pill Style)
+   5. Some layout components
    ========================================================================== */
-   
-/*
- * Corresponds to: <object class="GtkButton"> with <style><class name="pill"/></style>
- * This is the signature Libadwaita "Pill" button.
- */
-.style-pill {
-    /* Reset default button styles */
-    border: 1px solid transparent;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 700;
-
-    /* Pill-specific styles */
-    background-color: var(--adw-accent-color-bg);
-    color: var(--adw-accent-color);
-    border-radius: var(--adw-border-radius-pill);
-    padding: var(--adw-spacing-sm) var(--adw-spacing-lg);
-    font-size: var(--adw-font-size-sm);
-    margin-top: var(--adw-spacing-sm); /* Extra space above the button */
-
-    /* Smooth transition for hover/active states */
-    transition: all var(--adw-transition-duration) var(--adw-transition-timing-function);
-}
-
-.style-pill:hover {
-    /* On hover, slightly darken the background and add a subtle shadow */
-    background-color: hsla(var(--adw-accent-color-hsl), 0.15);
-    box-shadow: 0 2px 6px hsla(var(--adw-accent-color-hsl), 0.1);
-}
-
-.style-pill:active {
-    /* On click, make the effect more pronounced */
-    transform: translateY(1px);
-    background-color: hsla(var(--adw-accent-color-hsl), 0.2);
-    box-shadow: none;
-}
+ .vertical {
+    display: flex;
+    flex-direction: column;
+ }
