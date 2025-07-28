@@ -6,6 +6,9 @@ class layer(vercel.API):
         self.header_mime(url)
 
     def header_mime(self, url):
+        if url.endswith('/'):
+            self.send_header('Content-Type', 'text/html')
+            return
         mime_type, _ = mimetypes.guess_type(url)
         if mime_type:
             self.send_header('Content-Type', mime_type)
