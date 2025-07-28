@@ -1,4 +1,4 @@
-<img src="assets/com.github.johnfactotum.Foliate.svg" align="left" style="margin-right:8px"> 
+<img src="assets/logos/192x192.png" align="left" style="margin-right:8px"> 
 <br><br>
 
 # Foliate-Webui
