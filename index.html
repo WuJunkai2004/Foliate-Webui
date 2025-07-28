@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/manifest.json">
   <title>Library</title>
   <link rel="stylesheet" href="/css/foliate-library.css">
   <link rel="stylesheet" href="/css/core.css"></ink> 
@@ -58,7 +59,7 @@
               <input class="GtkSearchEntry" id="search-entry" type="text" placeholder="Search library…">
             </div>
 
-            <from href="/units/library-view.html" id="books-view"></unit>
+            <unit-from url="/units/library-view.html" id="books-view"></unit-from>
           </section>
 
           <section class="GtkStackPage AdwToolBarView style-background" id="catalog-toolbar-view">
@@ -85,7 +86,7 @@
               </button>
             </div>
 
-            <unit herf="/units/FoliateOPDSView.html" id="opds-view"></unit>
+            <unit-from url="/units/FoliateOPDSView.html" id="opds-view"></unit-from>
           </section>
 
         </main>
@@ -93,6 +94,8 @@
     </div>
 
   </main>
+  <script src="/scripts/utils.js"></script>
+  <script src="/scripts/library-view.js"></script>
 
 </body>
 

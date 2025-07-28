@@ -2,18 +2,18 @@ class unit extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.href = this.getAttribute('href');
-        fetch(this.href)
-        .then(response => response.text())
-        .then(html => {
-            this.shadowRoot.innerHTML = html;
-        })
-        .catch(error => {
-            console.error('Error loading unit:', error);
-            this.shadowRoot.innerHTML = `<p>Error loading unit: ${error.message}</p>`;
-        });
+        this.iframe = document.createElement('iframe');
+        this.iframe.style.width = '100%';
+        this.iframe.style.height = '100%';
+        this.iframe.style.border = 'none';
+        const url = this.getAttribute('url');
+        if (url) {
+            this.iframe.src = url;
+        }
+        this.shadowRoot.appendChild(this.iframe);
     }
 }
+customElements.define('unit-from', unit);
 
 
 document.addEventListener('DOMContentLoaded', () => {
