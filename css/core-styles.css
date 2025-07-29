@@ -47,3 +47,13 @@
 .style-background {
     background-color: var(--adw-bg-color); /* 還原背景色 */
 }
+
+
+.valign-center {
+    vertical-align: middle;
+}
+
+
+.halign-center {
+    text-align: center;
+}

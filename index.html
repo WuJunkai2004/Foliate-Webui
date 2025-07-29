@@ -51,7 +51,7 @@
     <div class="AdwBreakpointBin" id="breakpoint-bin">
       <div class="AdwBreakpoint AdwOverlaySplitView" id="split-view">
 
-        <aside class="AdwOverlaySplitView__sidebar">
+        <aside class="AdwOverlaySplitView__sidebar" id="sidebar">
           <div class="AdwToolBarView">
             <div class="AdwToolBarView__top AdwHeaderBar">
               <button class="AdwHeaderBar__end GtkMenuButton"
@@ -75,10 +75,11 @@
         <main class="AdwOverlaySplitView__content GtkStack" id="main-stack">
           <section class="GtkStackPage AdwToolBarView" id="library-toolbar-view">
             <div class="AdwToolBarView__top AdwHeaderBar">
-              <button class="AdwHeaderBar__start GtkToggleButton">
+              <!-- the button is useless, but now we just keep it -->
+              <button class="AdwHeaderBar__start GtkToggleButton" id="sidebar-toggle-button">
                 <img class="GtkToggleButton__icon" src="/assets/icons/sidebar-show-symbolic.svg" alt="icon">
               </button>
-              <button class="AdwHeaderBar__start GtkButton">
+              <button class="AdwHeaderBar__start GtkButton" id="library-add-button">
                 <img class="GtkButton__icon" src="/assets/icons/list-add-symbolic.svg" alt="icon">
               </button>
               <div class="AdwHeaderBar__title-widget">

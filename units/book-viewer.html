@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Viewer</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/core-styles.css">
+  <link rel="stylesheet" href="/css/book-viewer.css">
+</head>
+
+<body>
+
+<menu class="menu" id="book-menu" hidden>
+  <ul>
+    <li class="menu-item">
+      <p>New Window</p>
+    </li>
+    <li class="menu-item">
+      <p>Open a Copy</p>
+    </li>
+    <li class="menu-item">
+      <p>Reload</p>
+    </li>
+    <li class="menu-item">
+      <p>Import Annotations…</p>
+    </li>
+    <li class="menu-item">
+      <p>Export Annotations…</p>
+    </li>
+    <!--
+    <li class="menu-item">
+      <p>Keyboard Shortcuts</p>
+    </li>
+    -->
+    <li class="menu-item">
+      <p>About Foliate</p>
+    </li>
+  </ul>
+</menu>
+
+<menu class="menu" id="search-menu" hidden>
+  <ul>
+    <li class="menu-item">
+      <p>All Sections</p>
+    </li>
+    <li class="menu-item">
+      <p>Current Section</p>
+    </li>
+    <li class="menu-item">
+      <p>Match Whole Words Only</p>
+    </li>
+    <li class="menu-item">
+      <p>Match Case</p>
+    </li>
+    <li class="menu-item">
+      <p>Match Diacritics</p>
+    </li>
+  </ul>
+</menu>
+
+<menu class="menu" id="view-menu" hidden>
+  <ul>
+    <li class="menu-item">
+      <p>theme</p>
+    </li>
+    <li class="menu-item">
+      <p>zoom</p>
+    </li>
+    <li class="menu-item">
+      <p>Font &amp; Layout Settings</p>
+    </li>
+    <li class="menu-item">
+      <p>Scrolled Mode</p>
+    </li>
+    <li class="menu-item">
+      <p>Invert Colors in Dark Mode</p>
+    </li>
+    <li class="menu-item">
+      <p>Autohide Cursor</p>
+    </li>
+    <li class="menu-item">
+      <p>Print…</p>
+    </li>
+    <li class="menu-item">
+      <p>Inspector</p>
+  </ul>
+</menu>
+
+<main class="FFoliateBookViewer GtkOverlay">
+  <div class="GtkOverlay__overlay AdwToolBarView style-background" id="top-overlay-box">
+    <div class="AdwToolBarView__top GtkHeaderBar style-flat" id="top-overlay-headerbar">
+      <button class="GtkLable GtkButton halign-center">
+        <img class="GtkButton__icon" src="/assets/icons/go-previous-symbolic.svg" alt="Library">
+      </button>
+    </div>
+    <div class="GtkStack" id="top-overlay-stack">
+
+      <div class="GtkStackPage" id="nothing">
+        <div class="GtkBox"></div>
+      </div>
+
+      <div class="GtkStackPage" id="loading">
+        <div class="AdwSpinner"></div>
+      </div>
+
+      <div class="GtkStackPage" id="error">
+        <div class="AdwStatusPage" id="error-page">
+          <img class="AdwStatusPage__icon" src="/assets/icons/face-uncertain-symbolic.svg">
+          <h2 class="AdwStatusPage__title">Books Cannot be Opened</h2>
+          <div class="GtkBox vertical">
+            <div class="GtkExpander halign-center" id="error-page-expander">
+              <div class="GtkExpander__label GtkLable">
+                <p>Details</p>
+              </div>
+              <div class="GtkLable style-monospace" id="error-page-details">
+
+              </div>
+            </div>
+          </div>
+          <button class="GtkButton halign-center style-pill">
+            <span class="GtkButton__label">Open Another File…</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="AdwBreakpointBin" id="breakpoint-bin">
+    <div class="AdwBreakpoint AdwOverlaySplitView" id="flap">
+      <aside class="AdwOverlaySplitView__sidebar GtkOverlay" id="sidebar">
+        <div class="GtkOverlay__overlay GtkBox" id="resize-handle"></div>
+        <div class="AdwToolBarView">
+          <div class="AdwToolBarView__top AdwHeaderBar">
+            <button class="AdwHeaderBar__start GtkButton" id="library-button">
+              <img class="GtkButton__icon" src="/assets/icons/library-symbolic.svg" alt="Library">
+            </button>
+            <!--不知道这个是干什么用的，但是不敢删，留着-->
+            <div class="AdwHeaderBar__title-widget">
+              <p class="GtkLable"></p>
+            </div>
+            <button class="AdwHeaderBar__end GtkToggleButton">
+              <img class="GtkToggleButton__icon" src="/assets/icons/edit-find-symbolic.svg" alt="Find">
+            </button>
+            <button class="AdwHeaderBar__end GtkMenuButton" id="book-menu-button"
+              aria-haspopup="true" 
+              aria-expanded="false" 
+              aria-controls="book-menu">
+              <img class="GtkMenuButton__icon" src="/assets/icons/open-menu-symbolic.svg" alt="Book Menu">
+            </button>
+            </button>
+            <button class="AdwHeaderBar__end GtkToggleButton style-circular style-raised style-small-button" id="pin-button">
+              <img class="GtkToggleButton__icon" src="/assets/icons/pin-symbolic.svg" alt="Pin Sidebar">
+            </button> 
+          </div>
+          <div class="AdwToolBarView__top GtkSearchBar" id="search-bar" hidden>
+            <div class="GtkBox style-linked">
+              <input class="GtkEntry" id="search-entry" type="text" placeholder="Find in Book…">
+              <button class="GtkEntry__button">
+                <img class="GtkEntry__icon" src="/assets/icons/edit-find-symbolic.svg" alt="Find">
+              </button>
+              <button class="GtkMenuButton">
+                <img class="GtkMenuButton__icon" src="/assets/icons/pan-down-symbolic.svg">
+              </button>
+            </div>
+          </div>
+          <div class="GtkStack" id="sidebar-stack">
+            <div class="GtkStackPage GtkBox vertical" id="main">
+              <div class="AdwViewStack vexpand" id="contents-stack">
+                <div class="AdwViewStackPage" id="toc">
+                  <h2 class="AdwViewStackPage__title">Contents</h2>
+                  <img class="AdwViewStackPage_icon" src="/assets/icons/view-list-symbolic.svg">
+                  <div class="GtkBox vertical"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="AdwToolBarView__bottom AdwInlineViewSwitcher" id="contents-stack-switcher">
+            <!-- 奇怪的结构，以后再补 -->
+          </div>
+        </div>
+      </aside>
+      <main class="AdwOverlaySplitView__content FoliateBookView" id="view">
+        <div class="GtkWindowHandle valign-start">
+          <div class="GtkRevealer" id="headerbar-revealer">
+            <div class="AdwHeaderBar valign-start">
+              <button class="AdwHeaderBar__start GtkToggleBar">
+                <img class="GtkToggleBar__icon" src="/assets/icons/sidebar-show-symbolic.svg" alt="Sidebar">
+              </button>
+              <button class="AdwHeaderBar__start GtkButton" id="bookmark-button" hidden>
+                <img class="GtkButton__icon" src="/assets/icons/user-bookmarks-symbolic.svg">
+              </button>
+              <button class="AdwHeaderBar__end GtkToggleButton">
+                <img class="GtkToggleButton__icon" src="/assets/icons/view-fullscreen-symbolic.svg" alt="Fullscreen">
+              </button>
+              <button class="AdwHeaderBar__end GtkMenuButton">
+                <!-- 这里应该是一个比较复杂的机构，见 book-viewer.ui:581 -->
+                <img class="GtkMenuButton__icon" src="/assets/icons/view-more-symbolic.svg" alt="More Options">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="GtkRevealer valign-end" id="navbar-revealer">
+          <div class="GtkBox valign-end vertical style-background">
+            <div class="GtkSeparator"></div>
+            <unit-from url="/units/navbar.html" id="navbar"></unit-from>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</main>
+
+<script src="/scripts/utils.js"></script>
+
+</body>
+
+</html>

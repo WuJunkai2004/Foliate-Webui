@@ -50,6 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function buttonClickLogic(button, callback) {
+    if(!button || !callback) {
+        console.error('無法找到按鈕！');
+        return;
+    }
+    button.addEventListener('click', () => {
+        callback(button.textContent);
+    });
+}
+
+
 function buttonLogic(button, object, callback) {
     // click button, change object property, and call callback with the property value
     if(!button) {
@@ -61,7 +72,6 @@ function buttonLogic(button, object, callback) {
         isHidden = object.hidden;
     }
     button.addEventListener('click', () => {
-        console.log(`Button clicked, current hidden state: ${isHidden}`);
         if (object && object.hidden !== undefined) {
             object.hidden = isHidden;
             isHidden = !isHidden;
@@ -92,9 +102,7 @@ function buttonMenuLogic(menuButton, menu, callback){
 
     function showMenu() {
         menu.hidden = false;
-        
         menuButton.setAttribute('aria-expanded', 'true');
-        
         positionMenu();
     }
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoliateNavBar</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/core-styles.css">
+</head>
+
+<body>
+
+<main class="FoliateNavBar GtkBox style-toolbar">
+  <button class="GtkButton valign-center style-image-button">
+    <img class="GtkImage" src="/assets/icons/go-previous-symbolic.svg" alt="Previous"></button>
+  </button>
+
+  <button class="GtkButton valign-center style-image-button">
+    <img class="GtkImage" src="/assets/icons/edit-undo-symbolic.svg" alt="back"></button>
+  </button>
+
+  <button class="GtkButton valign-center style-image-button">
+    <img class="GtkImage" src="/assets/icons/edit-redo-symbolic.svg" alt="Forward"></button>
+  </button>
+
+  <div class="AdwBreakpointBin">
+    <div class="AdwBreakpoint GtkBox" id="progress-box">
+      <button class="GtkMenuButton style-numeric" id="location-button" alt="Location"></button>
+    </div>
+  </div>
+</main>
+
+</body>
+
+</html>
