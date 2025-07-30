@@ -1,276 +1,6 @@
 /* ==========================================================================
-   1. Adwaita Design System - A Comprehensive Token Set
-   ========================================================================== */
-:root {
-    /* Colors (Light Theme) */
-    --adw-accent-hsl: 212, 78%, 58%;
-    --adw-bg-hsl: 0, 0%, 97%;                   /* Slightly off-white window background: #f7f7f7 */
-    --adw-view-bg-hsl: 0, 0%, 100%;             /* Pure white for content views: #ffffff */
-    --adw-headerbar-bg-hsl: 0, 0%, 94%;         /* HeaderBar/Toolbar Background: #f0f0f0 */
-    --adw-sidebar-bg-hsl: 0, 0%, 91%;           /* Sidebar Background: #e8e8e8 */
-    --adw-text-hsl: 0, 0%, 18%;
-    --adw-text-dim-hsl: 0, 0%, 45%;
-    --adw-border-hsl: 0, 0%, 82%;
-    --adw-card-bg-hsl: 0, 0%, 95%;              /* For card-like elements */
-    --adw-card-border-hsl: 0, 0%, 89%;          /* Border for cards */
-
-    /* Derived Colors */
-    --adw-accent: hsl(var(--adw-accent-hsl));
-    --adw-accent-text: #fff;
-    --adw-bg: hsl(var(--adw-bg-hsl));
-    --adw-view-bg: hsl(var(--adw-view-bg-hsl));
-    --adw-headerbar-bg: hsl(var(--adw-headerbar-bg-hsl));
-    --adw-sidebar-bg: hsl(var(--adw-sidebar-bg-hsl));
-    --adw-text-color: hsl(var(--adw-text-hsl));
-    --adw-text-dim-color: hsl(var(--adw-text-dim-hsl));
-    --adw-border-color: hsl(var(--adw-border-hsl));
-    --adw-card-bg: hsl(var(--adw-card-bg-hsl));
-    --adw-card-border: hsl(var(--adw-card-border-hsl));
-    --adw-button-hover-bg: hsla(0, 0%, 0%, 0.08);
-    --adw-button-active-bg: hsla(0, 0%, 0%, 0.12);
-
-    /* Typography & Sizing */
-    --adw-font-family: 'Cantarell', 'Segoe UI', sans-serif;
-    --adw-font-monospace: 'JetBrains Mono', 'Fira Code', monospace;
-    --adw-spacing-unit: 6px;
-    --adw-radius-sm: 4px;
-    --adw-radius-md: 8px;
-    --adw-radius-lg: 12px;
-    --adw-radius-circular: 50%;
-
-    /* Transitions & Animations */
-    --adw-transition: 0.2s cubic-bezier(0.2, 0, 0.2, 1);
-    --adw-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-/* ==========================================================================
-   2. Base & Global Styles
-   ========================================================================== */
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    font-family: var(--adw-font-family);
-    background-color: var(--adw-bg);
-    color: var(--adw-text-color);
-    overflow: hidden;
-}
-
-/* Base style for all button-like elements */
-button, .GtkButton, .GtkToggleButton {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-family: inherit;
-    color: inherit;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    text-align: center;
-    border-radius: var(--adw-radius-md);
-    transition: background-color var(--adw-transition);
-}
-button:hover, .GtkButton:hover, .GtkToggleButton:hover {
-    background-color: var(--adw-button-hover-bg);
-}
-button:active, .GtkButton:active, .GtkToggleButton:active {
-    background-color: var(--adw-button-active-bg);
-}
-
-/* Icon styling */
-img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.GtkButton__icon, .GtkToggleButton__icon, .GtkMenuButton__icon {
-    width: 16px;
-    height: 16px;
-    opacity: 0.8;
-}
-
-
-/* ==========================================================================
-   3. Main Application Layout (GtkOverlay, AdwOverlaySplitView)
-   ========================================================================== */
-
-/* Corresponds to: <template class="FoliateBookViewer" parent="GtkOverlay"> */
-.FoliateBookViewer {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-/* Corresponds to: AdwOverlaySplitView (the main sidebar/content layout) */
-.AdwOverlaySplitView {
-    display: flex;
-    flex-grow: 1;
-}
-
-/* Corresponds to: AdwOverlaySplitView__sidebar */
-.AdwOverlaySplitView__sidebar {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    flex-basis: 300px; /* Base width */
-    min-width: 250px;
-    max-width: 50vw;
-    background-color: var(--adw-sidebar-bg);
-    position: relative; /* For the resize handle */
-}
-
-/* Corresponds to: AdwOverlaySplitView__content */
-.AdwOverlaySplitView__content {
-    flex-grow: 1;
-    position: relative; /* For the revealing toolbars */
-    background-color: var(--adw-view-bg);
-    display: flex; /* To center content */
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* ==========================================================================
-   4. Sidebar Components (#sidebar)
-   ========================================================================== */
-
-/* Corresponds to: The top AdwHeaderBar in the sidebar */
-.AdwOverlaySplitView__sidebar .AdwHeaderBar {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--adw-spacing-unit) * 1.5);
-    padding: var(--adw-spacing-unit);
-    border-bottom: 1px solid var(--adw-border-color);
-}
-.AdwHeaderBar__start, .AdwHeaderBar__end {
-    display: flex;
-    align-items: center;
-    gap: var(--adw-spacing-unit);
-}
-.AdwHeaderBar__title-widget {
-    flex-grow: 1; /* Pushes end items to the right */
-}
-
-/* Corresponds to: #pin-button with .raised style */
-#pin-button.style-raised {
-    background-color: var(--adw-view-bg);
-    border: 1px solid var(--adw-border-color);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-#pin-button.style-raised:hover {
-    background-color: #fff;
-}
-
-/* Corresponds to: GtkSearchBar and GtkEntry with .linked style */
-.GtkSearchBar {
-    padding: var(--adw-spacing-unit);
-    border-bottom: 1px solid var(--adw-border-color);
-}
-.GtkBox.style-linked {
-    display: flex;
-}
-.GtkBox.style-linked > * {
-    border: 1px solid var(--adw-border-color);
-    background-color: var(--adw-view-bg);
-    height: 36px;
-}
-.GtkBox.style-linked > :first-child {
-    border-top-left-radius: var(--adw-radius-md);
-    border-bottom-left-radius: var(--adw-radius-md);
-}
-.GtkBox.style-linked > :last-child {
-    border-top-right-radius: var(--adw-radius-md);
-    border-bottom-right-radius: var(--adw-radius-md);
-}
-.GtkBox.style-linked > :not(:first-child) {
-    margin-left: -1px; /* Overlap borders */
-}
-.GtkEntry {
-    flex-grow: 1;
-    padding-inline: var(--adw-spacing-unit);
-    outline: none;
-}
-.GtkEntry:focus-within { /* A trick to style parent on input focus */
-    border-color: var(--adw-accent);
-    z-index: 1;
-}
-
-/* Corresponds to: AdwInlineViewSwitcher (tab bar at the bottom) */
-.AdwInlineViewSwitcher {
-    display: flex;
-    justify-content: center;
-    padding: var(--adw-spacing-unit);
-    background-color: hsl(0, 0%, 93%);
-}
-
-/* Corresponds to: Book info section */
-#book-info {
-    display: flex;
-    gap: var(--adw-spacing-unit);
-    padding: var(--adw-spacing-unit);
-    align-items: center;
-}
-#book-cover {
-    width: 64px; height: 64px;
-    flex-shrink: 0;
-    background-color: var(--adw-card-bg);
-    border-radius: var(--adw-radius-sm);
-}
-#book-title.heading { font-weight: bold; }
-#book-author.caption { font-size: 0.85rem; color: var(--adw-text-dim-color); }
-
-/* Corresponds to: The main scrollable area in the sidebar */
-.GtkScrolledWindow {
-    flex-grow: 1;
-    overflow-y: auto;
-}
-.FoliateTOCView.navigation-sidebar {
-    padding: var(--adw-spacing-unit);
-}
-
-
-/* ==========================================================================
    5. Revealing Toolbars (#headerbar-revealer, #navbar-revealer)
    ========================================================================== */
-
-/* Corresponds to: GtkRevealer */
-.GtkRevealer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 5;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity var(--adw-transition), transform var(--adw-transition);
-    pointer-events: none; /* Cannot be interacted with when hidden */
-}
-.GtkRevealer.valign-end {
-    top: auto;
-    bottom: 0;
-    transform: translateY(20px);
-}
-
-/* The revealing magic: show toolbars on parent hover */
-.AdwOverlaySplitView__content:hover .GtkRevealer {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* The header bar inside the revealer */
-#headerbar-revealer .AdwHeaderBar {
-    background-color: hsla(var(--adw-headerbar-bg-hsl), 0.85);
-    backdrop-filter: blur(10px);
-    --webkit-backdrop-filter: blur(10px);
-    border: none;
-    border-radius: var(--adw-radius-lg);
-    margin: var(--adw-spacing-unit);
-    box-shadow: var(--adw-shadow);
-    padding: var(--adw-spacing-unit);
-}
 
 
 /* ==========================================================================
@@ -300,10 +30,7 @@ img {
     justify-content: center;
 }
 
-/* Corresponds to: AdwSpinner */
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+
 .AdwSpinner {
     width: 32px;
     height: 32px;
@@ -314,9 +41,6 @@ img {
 }
 
 /* Corresponds to: AdwStatusPage and GtkExpander for error details */
-.AdwStatusPage { text-align: center; }
-.AdwStatusPage__icon { width: 48px; height: 48px; opacity: 0.7; margin-bottom: var(--adw-spacing-unit); }
-.AdwStatusPage__title { font-size: 1.2rem; font-weight: bold; }
 .GtkExpander {
     background: var(--adw-card-bg);
     border: 1px solid var(--adw-card-border);
@@ -325,14 +49,13 @@ img {
     margin: var(--adw-spacing-unit);
     max-width: 400px;
 }
-.GtkLable.style-monospace {
-    font-family: var(--adw-font-monospace);
-    font-size: 0.8rem;
-    background-color: hsl(0, 0%, 99%);
-    border: 1px solid var(--adw-border-color);
-    padding: var(--adw-spacing-unit);
-    margin-top: var(--adw-spacing-unit);
-    border-radius: var(--adw-radius-sm);
-    text-align: left;
-    white-space: pre-wrap;
+
+
+#book-viewer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--adw-bg);
 }

@@ -38,14 +38,6 @@ main {
     height: 100%;
 }
 
-button{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font: inherit;
-}
-
 :root {
     /* Colors - Light Theme (用於彈出式選單) */
     --adw-popover-bg-hsl: 0, 0%, 100%;

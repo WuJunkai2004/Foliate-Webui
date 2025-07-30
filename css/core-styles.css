@@ -57,3 +57,56 @@
 .halign-center {
     text-align: center;
 }
+
+
+/* Corresponds to: #pin-button with .raised style */
+.style-raised {
+    background-color: var(--adw-view-bg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.style-raised:hover {
+    background-color: #fff;
+}
+
+
+
+.style-linked {
+    display: flex;
+}
+.style-linked > * {
+    border: 1px solid var(--adw-border-color);
+    background-color: var(--adw-view-bg);
+    height: 36px;
+}
+.style-linked > :first-child {
+    border-top-left-radius: var(--adw-radius-md);
+    border-bottom-left-radius: var(--adw-radius-md);
+}
+.style-linked > :last-child {
+    border-top-right-radius: var(--adw-radius-md);
+    border-bottom-right-radius: var(--adw-radius-md);
+}
+.style-linked > :not(:first-child) {
+    margin-left: -1px; /* Overlap borders */
+}
+
+
+.style-monospace {
+    font-family: var(--adw-font-monospace);
+    font-size: 0.8rem;
+    background-color: hsl(0, 0%, 99%);
+    border: 1px solid var(--adw-border-color);
+    padding: var(--adw-spacing-unit);
+    margin-top: var(--adw-spacing-unit);
+    border-radius: var(--adw-radius-sm);
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+/* ==========================================================================
+   5. Some layout components
+   ========================================================================== */
+   .vertical {
+    display: flex;
+    flex-direction: column;
+ }

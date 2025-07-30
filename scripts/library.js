@@ -1,8 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const iframe = document.getElementById('books-view').iframe;
-    
-});
-
+import * as core from './core.js';
 
 function openFile() {
     // 创建一个文件选择对话框
@@ -34,33 +30,22 @@ function openFile() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    buttonClickLogic(
-        document.getElementById('library-add-button'),
-        openFile
-    );
-    buttonLogic(
-        document.getElementById('sidebar-toggle-button'),
-        document.getElementById('sidebar'),
-        (isHidden) => { console.log(`sidebar is now ${isHidden ? 'hidden' : 'visible'}`); }
-    );
-    buttonLogic(
-        document.getElementById('library-search-button'),
-        document.getElementById('search-bar'),
-        (isHidden) => { console.log(`search bar is now ${isHidden ? 'hidden' : 'visible'}`); }
-    );
-    buttonMenuLogic(
-        document.getElementById('primary-menu-button'),
-        document.getElementById('primary-menu'),
-        (num) => { console.log(`Primary Menu item ${num} clicked`); }
-    );
-    buttonMenuLogic(
-        document.getElementById('library-menu-button'),
-        document.getElementById('library-menu'),
-        (num) => { console.log(`library Menu item ${num} clicked`); }
-    );
-    searchBarLogic(
-        document.getElementById('search-entry'),
-        undefined,
-        (query) => { console.log(`Search query: ${query}`); }
-    )
+    core.button(document.getElementById('library-add-button'))
+        .bindClick(openFile);
+    core.button(document.getElementById('sidebar-toggle-button'))
+        .bindObject(
+            document.getElementById('sidebar'),
+            (isHidden) => { console.log(`sidebar is now ${isHidden ? 'hidden' : 'visible'}`); }
+        );
+    core.button(document.getElementById('primary-menu-button'))
+        .bindMenu(
+            document.getElementById('primary-menu'),
+            (num) => { console.log(`Primary Menu item ${num} clicked`); }
+        );
+    core.button(document.getElementById('library-menu-button'))
+        .bindMenu(
+            document.getElementById('library-menu'),
+            (num) => { console.log(`Library Menu item ${num} clicked`); }
+        );
+    core.entry(document.getElementById('search-entry'));
 });

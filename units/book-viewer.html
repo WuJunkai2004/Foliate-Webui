@@ -63,10 +63,29 @@
 <menu class="menu" id="view-menu" hidden>
   <ul>
     <li class="menu-item">
-      <p>theme</p>
+      <div class="GtkBox">
+        <button class="GtkCheckButton style-theme-selector style-follow">
+          <img class="GtkCheckButton__icon" src="/assets/icons/view-theme-follow-symbolic.svg" alt="Follow System Theme">
+        </button>
+        <button class="GtkCheckButton style-theme-selector style-light">
+          <img class="GtkCheckButton__icon" src="/assets/icons/view-theme-light-symbolic.svg" alt="Light Theme">
+        </button>
+        <button class="GtkCheckButton style-theme-selector style-dark">
+          <img class="GtkCheckButton__icon" src="/assets/icons/view-theme-dark-symbolic.svg" alt="Dark Theme">
+        </button>
+      </div>
     </li>
     <li class="menu-item">
-      <p>zoom</p>
+      <div class="GtkBox">
+        <button class="GtkButton style-circular style-flat">
+          <img class="GtkButton__icon" src="/assets/icons/zoom-out-symbolic.svg" alt="Zoom Out">
+        </button>
+        <button class="GtkButton style-flat" id="zoon-button" alt="Reset Zoom">
+          <span class="GtkButton__label"></span>
+        </button>
+        <button class="GtkButton style-circular style-flat">
+          <img class="GtkButton__icon" src="/assets/icons/zoom-in-symbolic.svg" alt="Zoom In">
+      </div>
     </li>
     <li class="menu-item">
       <p>Font &amp; Layout Settings</p>
@@ -88,7 +107,7 @@
   </ul>
 </menu>
 
-<main class="FFoliateBookViewer GtkOverlay">
+<main class="FoliateBookViewer GtkOverlay" id="book-viewer">
   <div class="GtkOverlay__overlay AdwToolBarView style-background" id="top-overlay-box">
     <div class="AdwToolBarView__top GtkHeaderBar style-flat" id="top-overlay-headerbar">
       <button class="GtkLable GtkButton halign-center">
@@ -137,7 +156,6 @@
             <button class="AdwHeaderBar__start GtkButton" id="library-button">
               <img class="GtkButton__icon" src="/assets/icons/library-symbolic.svg" alt="Library">
             </button>
-            <!--不知道这个是干什么用的，但是不敢删，留着-->
             <div class="AdwHeaderBar__title-widget">
               <p class="GtkLable"></p>
             </div>
@@ -168,10 +186,10 @@
           </div>
           <div class="GtkStack" id="sidebar-stack">
             <div class="GtkStackPage GtkBox vertical" id="main">
-              <div class="AdwViewStack vexpand" id="contents-stack">
-                <div class="AdwViewStackPage" id="toc">
-                  <h2 class="AdwViewStackPage__title">Contents</h2>
-                  <img class="AdwViewStackPage_icon" src="/assets/icons/view-list-symbolic.svg">
+              <div class="GtkStack vexpand" id="contents-stack">
+                <div class="GtkStackPage" id="toc">
+                  <h2 class="GtkStackPage__title">Contents</h2>
+                  <img class="GtkStackPage_icon" src="/assets/icons/view-list-symbolic.svg">
                   <div class="GtkBox vertical"></div>
                 </div>
               </div>
@@ -196,7 +214,6 @@
                 <img class="GtkToggleButton__icon" src="/assets/icons/view-fullscreen-symbolic.svg" alt="Fullscreen">
               </button>
               <button class="AdwHeaderBar__end GtkMenuButton">
-                <!-- 这里应该是一个比较复杂的机构，见 book-viewer.ui:581 -->
                 <img class="GtkMenuButton__icon" src="/assets/icons/view-more-symbolic.svg" alt="More Options">
               </button>
             </div>
@@ -213,7 +230,8 @@
   </div>
 </main>
 
-<script src="/scripts/utils.js"></script>
+<script type="module" src="/scripts/utils.js"></script>
+<script type="module" src="/scripts/book-viewer.js"></script>
 
 </body>
 
